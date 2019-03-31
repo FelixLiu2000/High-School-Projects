@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BosenQuFelixLiuFinalCulminatingProject.Background" Collapsed="true">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQIAAIQgAQAAIAAgAAgEQQAAAAAAAwAAAIAAAAAJAAE=</HashCode>
+      <FileName>Background.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BosenQuFelixLiuFinalCulminatingProject.DefenseTower" Collapsed="true">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAIAAAAAAAAAAIAEAAgAAAAAAAgAEIAAAAIAAA=</HashCode>
+      <FileName>DefenseTower.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BosenQuFelixLiuFinalCulminatingProject.DefenseTowerList" Collapsed="true">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAACAAADAAAAAEAAgAAAABAAAAAAAAAAIAAA=</HashCode>
+      <FileName>DefenseTower.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BosenQuFelixLiuFinalCulminatingProject.Enemy" Collapsed="true">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAIEAAAAAAAAAAAAAAAAAAQAoRABgAIAYAAg=</HashCode>
+      <FileName>Enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BosenQuFelixLiuFinalCulminatingProject.EnemyList" Collapsed="true">
+    <Position X="8.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAACAAgAAAAAAAAAAAAABAAgAAAAIAAA=</HashCode>
+      <FileName>Enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BosenQuFelixLiuFinalCulminatingProject.HealthBar" Collapsed="true">
+    <Position X="10.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAABAAAAAgAAQAAAAAAAAAAAAAAAICAAIAAA=</HashCode>
+      <FileName>HealthBar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BosenQuFelixLiuFinalCulminatingProject.Main" Collapsed="true">
+    <Position X="12" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACBAABAACEAAAAAAIGgAAACAAAIAUABwgAAQAAEIAA=</HashCode>
+      <FileName>Main.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BosenQuFelixLiuFinalCulminatingProject.Placement" Collapsed="true">
+    <Position X="13.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAABBQAAAACAAAgAEAAAAAAAAgAAAAAAAAAKAAA=</HashCode>
+      <FileName>Placement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BosenQuFelixLiuFinalCulminatingProject.Program" Collapsed="true">
+    <Position X="8.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BosenQuFelixLiuFinalCulminatingProject.Projectile" Collapsed="true">
+    <Position X="10.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIFAAkEABAADEQAAAJAAABAAAAGIQIAQIBCACAYAIA=</HashCode>
+      <FileName>Projectile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BosenQuFelixLiuFinalCulminatingProject.GUI.Button">
+    <Position X="3.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABEAAAAAAAAAAACgAAAAAABAAAAAAAIAAA=</HashCode>
+      <FileName>GUI\Button.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BosenQuFelixLiuFinalCulminatingProject.GUI.Container">
+    <Position X="6" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GUI\Container.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BosenQuFelixLiuFinalCulminatingProject.GUI.UI" Collapsed="true">
+    <Position X="8.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAACgAAAgAgAAAACgAAAAAAAAAAAAAQIAAA=</HashCode>
+      <FileName>GUI\UI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BosenQuFelixLiuFinalCulminatingProject.GUI.Widget">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACEABAAAAAAAAAAIAQAAAAACACAAADAJAQAACAAJAAA=</HashCode>
+      <FileName>GUI\Widget.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BosenQuFelixLiuFinalCulminatingProject.Properties.Resources">
+    <Position X="12" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAABAAIAAABEAAQAxAAAABQFAAAAgAABIE=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BosenQuFelixLiuFinalCulminatingProject.Properties.Settings" Collapsed="true">
+    <Position X="13.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="BosenQuFelixLiuFinalCulminatingProject.ProjectileInformation" Collapsed="true">
+    <Position X="8.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAABAAAAAAAgAABoAAAAAAA=</HashCode>
+      <FileName>Projectile.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="BosenQuFelixLiuFinalCulminatingProject.Tile" Collapsed="true">
+    <Position X="8.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAIIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Background.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BosenQuFelixLiuFinalCulminatingProject.GUI.UIType" Collapsed="true">
+    <Position X="12" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GUI\UI.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BosenQuFelixLiuFinalCulminatingProject.GUI.UIButtonFunctions" Collapsed="true">
+    <Position X="10.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GUI\UI.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
