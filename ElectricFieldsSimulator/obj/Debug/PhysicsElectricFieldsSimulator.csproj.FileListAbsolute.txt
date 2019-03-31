@@ -1,0 +1,19 @@
+D:\Felix\Documents\School Documents\Grade 12 - RGSS\Physics SPH4U1\Fields Project\PhysicsElectricFieldsSimulator\PhysicsElectricFieldsSimulator\bin\Debug\PhysicsElectricFieldsSimulator.exe.config
+D:\Felix\Documents\School Documents\Grade 12 - RGSS\Physics SPH4U1\Fields Project\PhysicsElectricFieldsSimulator\PhysicsElectricFieldsSimulator\bin\Debug\PhysicsElectricFieldsSimulator.exe
+D:\Felix\Documents\School Documents\Grade 12 - RGSS\Physics SPH4U1\Fields Project\PhysicsElectricFieldsSimulator\PhysicsElectricFieldsSimulator\bin\Debug\PhysicsElectricFieldsSimulator.pdb
+D:\Felix\Documents\School Documents\Grade 12 - RGSS\Physics SPH4U1\Fields Project\PhysicsElectricFieldsSimulator\PhysicsElectricFieldsSimulator\obj\Debug\PhysicsElectricFieldsSimulator.csprojResolveAssemblyReference.cache
+D:\Felix\Documents\School Documents\Grade 12 - RGSS\Physics SPH4U1\Fields Project\PhysicsElectricFieldsSimulator\PhysicsElectricFieldsSimulator\obj\Debug\PhysicsElectricFieldsSimulator.Properties.Resources.resources
+D:\Felix\Documents\School Documents\Grade 12 - RGSS\Physics SPH4U1\Fields Project\PhysicsElectricFieldsSimulator\PhysicsElectricFieldsSimulator\obj\Debug\PhysicsElectricFieldsSimulator.csproj.GenerateResource.Cache
+D:\Felix\Documents\School Documents\Grade 12 - RGSS\Physics SPH4U1\Fields Project\PhysicsElectricFieldsSimulator\PhysicsElectricFieldsSimulator\obj\Debug\PhysicsElectricFieldsSimulator.csproj.CoreCompileInputs.cache
+D:\Felix\Documents\School Documents\Grade 12 - RGSS\Physics SPH4U1\Fields Project\PhysicsElectricFieldsSimulator\PhysicsElectricFieldsSimulator\obj\Debug\PhysicsElectricFieldsSimulator.exe
+D:\Felix\Documents\School Documents\Grade 12 - RGSS\Physics SPH4U1\Fields Project\PhysicsElectricFieldsSimulator\PhysicsElectricFieldsSimulator\obj\Debug\PhysicsElectricFieldsSimulator.pdb
+D:\Felix\Documents\School Documents\Grade 12 - RGSS\Physics SPH4U1\Fields Project\PhysicsElectricFieldsSimulator\PhysicsElectricFieldsSimulator\obj\Debug\PhysicsElectricFieldsSimulator.Main.resources
+E:\PhysicsElectricFieldsSimulator\PhysicsElectricFieldsSimulator\bin\Debug\PhysicsElectricFieldsSimulator.exe.config
+E:\PhysicsElectricFieldsSimulator\PhysicsElectricFieldsSimulator\obj\Debug\PhysicsElectricFieldsSimulator.exe
+E:\PhysicsElectricFieldsSimulator\PhysicsElectricFieldsSimulator\obj\Debug\PhysicsElectricFieldsSimulator.pdb
+E:\PhysicsElectricFieldsSimulator\PhysicsElectricFieldsSimulator\obj\Debug\PhysicsElectricFieldsSimulator.csprojResolveAssemblyReference.cache
+E:\PhysicsElectricFieldsSimulator\PhysicsElectricFieldsSimulator\obj\Debug\PhysicsElectricFieldsSimulator.Main.resources
+E:\PhysicsElectricFieldsSimulator\PhysicsElectricFieldsSimulator\obj\Debug\PhysicsElectricFieldsSimulator.Properties.Resources.resources
+E:\PhysicsElectricFieldsSimulator\PhysicsElectricFieldsSimulator\obj\Debug\PhysicsElectricFieldsSimulator.csproj.GenerateResource.Cache
+E:\PhysicsElectricFieldsSimulator\PhysicsElectricFieldsSimulator\bin\Debug\PhysicsElectricFieldsSimulator.exe
+E:\PhysicsElectricFieldsSimulator\PhysicsElectricFieldsSimulator\bin\Debug\PhysicsElectricFieldsSimulator.pdb
