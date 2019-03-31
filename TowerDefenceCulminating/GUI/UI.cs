@@ -1,14 +1,4 @@
-﻿/*
- * Felix Liu
- * January 15th, 2017
- * 
- * Contains types, methods, properties for creating widget objects, declaring/managing user and background objects, 
- * defining start game and game over widgets and menus with static constants and enums,
- * and drawing all UI related elements.
- * 
-*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -143,7 +133,7 @@ namespace BosenQuFelixLiuFinalCulminatingProject.GUI
         void StartMenus()
         {
             // Set button fonts and locations
-            int startButtonsXLocation =  (Main.size.Width / 2) - (Main.size.Width / 4);
+            int startButtonsXLocation = (Main.size.Width / 2) - (Main.size.Width / 4);
             Font btnFont = new Font("Trebuchet MS", 52);
             StringFormat btnTxtFormat = new StringFormat();
             btnTxtFormat.Alignment = StringAlignment.Center;
@@ -174,7 +164,7 @@ namespace BosenQuFelixLiuFinalCulminatingProject.GUI
             Size toolBarSize = new Size(4 * gameButtonMargin + 3 * gameButtonSize.Width, gameButtonSize.Height + gameButtonMargin);
             Point toolBarLocation = new Point(Main.size.Width - toolBarSize.Width, 0);
  
-            Size userStatsSize = new Size(toolBarSize.Width, (int)(toolBarSize.Height * (3f/4f)));
+            Size userStatsSize = new Size(toolBarSize.Width, (int)(toolBarSize.Height * (3f / 4f)));
             Point userStatsLocation = new Point(Main.size.Width - userStatsSize.Width, toolBarSize.Height);
             int userStatsStatSpace = userStatsSize.Width / 3;
 
@@ -330,12 +320,16 @@ namespace BosenQuFelixLiuFinalCulminatingProject.GUI
         // Timer update method, runs every program cycle. Takes the current enemy list's array reference as its parameter, no return value.
         public void Update(ref Enemy[] targets)
         {
-            // If the instance of Placement has been instantiated, update the current defence towers
-            if (placeTower != null)
-                placeTower.Update(ref targets);
+            // If the current game state of the UI is game
+            if (CurrentState == UIState.Game)
+            {
+                // If the instance of Placement has been instantiated, update the current defence towers
+                if (placeTower != null)
+                    placeTower.Update(ref targets);
 
-            // Update the user stats being displayed
-            UpdateUserStats();
+                // Update the user stats being displayed
+                UpdateUserStats();
+            }
         }
 
         // Updates the user stats. Prevents towers from being interactable if the user lacks the money, and detects whether the user health drops to 0.
@@ -388,15 +382,15 @@ namespace BosenQuFelixLiuFinalCulminatingProject.GUI
                 {
                     case UIButtonFunctions.Tower1:
                         // Draw tower 1
-                        placeTower.Paint(e, Properties.Resources.NormalTower, Properties.Resources.NormalProjectile);
+                        placeTower.Paint(e);
                         break;
                     case UIButtonFunctions.Tower2:
                         // Draw tower 2
-                        placeTower.Paint(e, Properties.Resources.LongRangeTower, Properties.Resources.NormalProjectile);
+                        placeTower.Paint(e);
                         break;
                     case UIButtonFunctions.Tower3:
                         // Draw tower 3
-                        placeTower.Paint(e, Properties.Resources.MissileTowerWithProjectile, Properties.Resources.MissileProjectile);
+                        placeTower.Paint(e);
                         break;
                     default:
                         break;

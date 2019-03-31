@@ -28,7 +28,6 @@ namespace BosenQuFelixLiuFinalCulminatingProject
         Stopwatch refreshCounter = new Stopwatch();
         const int FRAME_RATE = 60;
         const float FRAME_TIME = 1f / FRAME_RATE;
-
         const int MAX_CLIENT_HEIGHT = 800;
         const int MAX_CLIENT_WIDTH = 1300;
         // GUI
@@ -36,19 +35,38 @@ namespace BosenQuFelixLiuFinalCulminatingProject
         // Stores size of the form
         public static Size size;
         // Enemy and healthbar object arrays, size 10 to begin with
-        static EnemyList enemies;
-        
+        static EnemyList enemyCurrentRound;
+        //set the stop watch that checks the gaptime between each wave
+        Stopwatch gapTimeBetweenWaves = new Stopwatch();
+        //set the vairbles stores if each round is initialized or not
+        bool newRoundSetted = false;
+        //store in the starting location of the enemy
+        const float ENEMY_STARTING_X_LOCATION = 735, ENEMY_STARTING_Y_LOCATION = -100;
+        //store in the speed of the enemy
+        const float FIRST_ROUND_ENEMY_SPEED = 100;
+        //store in the distance between each enemy
+        const float GAP_DISTANCE_BETWEEN_ENEMIES = 70;
+        //store in the size of the enemy
+        SizeF enemySize = new SizeF(30, 30);
+        const int FIRST_ROUND_ENEMY_HEALTH = 150;
+        //store in the number of enemies
+        const int FIRST_ROUND_NUMBER_OF_ENEMIES = 10;
+        const int GAP_TIME_BETWEEN_EACH_ROUND = 6;
         public Main()
         {
+        //store in the health of the enemy
             InitializeComponent();
             ClientSize = new Size(MAX_CLIENT_WIDTH, MAX_CLIENT_HEIGHT);
             // Lock program size
             MaximizeBox = false;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             size = ClientSize;
-            enemies = new EnemyList(10, 735, -100, 100, 70, new SizeF(30, 30), 150, 25, Properties.Resources.Enemy1);
+            //set the first round
+            enemyCurrentRound = new EnemyList(FIRST_ROUND_NUMBER_OF_ENEMIES, ENEMY_STARTING_X_LOCATION, ENEMY_STARTING_Y_LOCATION, FIRST_ROUND_ENEMY_SPEED, GAP_DISTANCE_BETWEEN_ENEMIES, enemySize, FIRST_ROUND_ENEMY_HEALTH, 25, Properties.Resources.Enemy1);
+            //tell the program we have already finished setting the new round
+            newRoundSetted = true;
             // GUI
-            gui = new UI(UIState.Start);
+            gui = new UI(UIState.Start);    
         }
 
         void Timer()
@@ -71,13 +89,12 @@ namespace BosenQuFelixLiuFinalCulminatingProject
                 previousTime = currentTime;
                 
                 // *Timer Activities*
-
-                enemies.Update();
+                enemyCurrentRound.Update();
                 //round1.Update();
-                gui.Update(ref enemies.enemies);
-
+                gui.Update(ref enemyCurrentRound.enemies);
                 // *Timer Activities*
-
+                //set the new round
+                RoundSettings();
                 // If time from last refresh is greater than the frame time
                 if (refreshCounter.Elapsed.TotalSeconds >= FRAME_TIME)
                 {
@@ -86,15 +103,64 @@ namespace BosenQuFelixLiuFinalCulminatingProject
                     // Restart stopwatch
                     refreshCounter.Restart();
                 }
-
                 // Allow other interactions/code while this loop is active
                 Application.DoEvents();
             }
         }
-
+        /*
+         * This function sets the gap tiem between each round
+         */
+        void RoundSettings()
+        {
+            //if one round is finished, start the stop watch
+            if (enemyCurrentRound.enemies.Length == 0)
+            {
+                if (newRoundSetted == true)
+                {
+                    gapTimeBetweenWaves.Restart();
+                    newRoundSetted = false;
+                }
+            }
+            //if it reaches gap time, start another round and stop the timer
+            if (gapTimeBetweenWaves.Elapsed.TotalSeconds >= GAP_TIME_BETWEEN_EACH_ROUND)
+            {
+                if (newRoundSetted == false)
+                {
+                    UI.user.NextWave();
+                    SetNewRound(UI.user.WavesSurvived + 1);
+                    gapTimeBetweenWaves.Reset();
+                    newRoundSetted = true;
+                }
+            }
+        }
+        /*
+         * This function sets a new round. It takes the new round number as its argument.
+         */
+        void SetNewRound(int newRoundNumber)
+        {
+            //store in the values needed for the enemy
+            const int NUMBER_OF_ENEMY_EXPENDING_RATE = 2;
+            const int ENEMY_SPEED_EXPENDING_RATE = 10;
+            const int ENEMY_HEALTH_EXPENDING_RATE = 75;
+            const int MONEY_EXPENDING_RATE = 5;
+            //store in the values needed for the round number
+            const int ROUND_TWO = 2, ROUND_THREE = 3;
+            //set the round depending on the input round number. Each round gets harder
+            switch(newRoundNumber)
+            {
+                case ROUND_TWO:
+                    enemyCurrentRound = new EnemyList(FIRST_ROUND_NUMBER_OF_ENEMIES + newRoundNumber * NUMBER_OF_ENEMY_EXPENDING_RATE, ENEMY_STARTING_X_LOCATION, ENEMY_STARTING_Y_LOCATION, FIRST_ROUND_ENEMY_SPEED + ENEMY_SPEED_EXPENDING_RATE * newRoundNumber, GAP_DISTANCE_BETWEEN_ENEMIES, enemySize, FIRST_ROUND_ENEMY_HEALTH + ENEMY_HEALTH_EXPENDING_RATE * newRoundNumber, 25 + newRoundNumber * MONEY_EXPENDING_RATE, Properties.Resources.Enemy2);
+                    break;
+                case ROUND_THREE:
+                    enemyCurrentRound = new EnemyList(FIRST_ROUND_NUMBER_OF_ENEMIES + newRoundNumber * NUMBER_OF_ENEMY_EXPENDING_RATE, ENEMY_STARTING_X_LOCATION, ENEMY_STARTING_Y_LOCATION, FIRST_ROUND_ENEMY_SPEED + ENEMY_SPEED_EXPENDING_RATE * newRoundNumber, GAP_DISTANCE_BETWEEN_ENEMIES, enemySize, FIRST_ROUND_ENEMY_HEALTH + ENEMY_HEALTH_EXPENDING_RATE * newRoundNumber, 25 + newRoundNumber * MONEY_EXPENDING_RATE, Properties.Resources.Enemy3);
+                    break;
+                default:
+                    break;
+            }
+        }
         public static void Restart()
         {
-            enemies = new EnemyList(10, 735, -100, 100, 70, new SizeF(30, 30), 200, 25, Properties.Resources.Enemy1);
+            enemyCurrentRound = new EnemyList(10, 735, -100, 100, 70, new SizeF(30, 30), 200, 25, Properties.Resources.Enemy1);
             gui.RestartGame();
         }
 
@@ -109,7 +175,7 @@ namespace BosenQuFelixLiuFinalCulminatingProject
 
             if (gui.CurrentState == UIState.Game)
             {
-                enemies.Paint(e);
+                enemyCurrentRound.Paint(e);
             }
         }
 

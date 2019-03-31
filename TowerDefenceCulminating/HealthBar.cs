@@ -1,9 +1,7 @@
 ﻿/*
  * Felix Liu
  * January 12, 2017
- * 
- * Responsible for generating and managing enemy health bars, provides methods to do so.
- * 
+ * Responsible for generating and managing enemy health bars
  */
 using System;
 using System.Collections.Generic;
@@ -15,7 +13,9 @@ using System.Windows.Forms;
 
 namespace BosenQuFelixLiuFinalCulminatingProject
 {
-    // Class for providing enemies with healthbars, with methods for refreshing/showing healthbars upon health refresh.
+    /// <summary>
+    /// Provides enemies with healthbars and contains methods for refreshing/showing healthbars upon health refresh.
+    /// </summary>
     class HealthBar
     {
         // Stores the current size, location and bounding box of the health bar (when at full health)
@@ -60,11 +60,9 @@ namespace BosenQuFelixLiuFinalCulminatingProject
             }
         }
 
-        // Public method with no return value that uses the OnPaint function to display the health bar. The parameters are the OnPaint PaintEventArgs parameter from the main class,
-        // the color of the full health bar and the color of the current health bar
+        // Public method with no return value that uses the OnPaint function to display the health bar. The parameters are the OnPaint
         public void Paint(PaintEventArgs e, Brush fullHealthColour, Brush currentHealthColour)
         {
-            // Draw rectangles with their bounding boxes and colors
             e.Graphics.FillRectangle(fullHealthColour, fullBarBB);
             e.Graphics.FillRectangle(currentHealthColour, currentBarBB);
         }

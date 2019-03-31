@@ -145,7 +145,7 @@
   <data name="MissileTowerWithProjectile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\towerDefense_tile206.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NormalProjectile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="LongRangeProjectile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\towerDefense_tile272.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PlacingItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -184,13 +184,22 @@
   <data name="NormalTower" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\towerDefense_tile291.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Explosion" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Explosion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="MissileTowerWithoutProjectile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\towerDefense_tile229.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Enemy1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Enemy3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\spaceAstronauts_006.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NormalProjectile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\towerDefense_tile274.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Enemy2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\spaceAstronauts_012.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Enemy1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\spaceAstronauts_018.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Explosion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\explosion00.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

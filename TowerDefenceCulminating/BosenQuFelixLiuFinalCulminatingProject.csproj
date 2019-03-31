@@ -175,6 +175,30 @@
   <ItemGroup>
     <None Include="Resources\spaceAstronauts_006.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\towerDefense_tile274.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spaceAstronauts_012.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spaceAstronauts_018.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\towerDefense_tile245.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\towerDefense_tile246.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\towerDefense_tile247.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\towerDefense_tile248.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\explosion00.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

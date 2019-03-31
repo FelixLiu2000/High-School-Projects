@@ -67,7 +67,7 @@ namespace BosenQuFelixLiuFinalCulminatingProject
         //store the type of the defense tower
         DefenseTowerType defenseTowerType;
         //store the initial image for the each kind of the projectile
-        Bitmap normalProjectileImage = Properties.Resources.NormalProjectile, missileProjectileImage = Properties.Resources.MissileProjectile;
+        Bitmap normalProjectileImage = Properties.Resources.NormalProjectile, longRangeProjectileImage = Properties.Resources.LongRangeProjectile, missileProjectileImage = Properties.Resources.MissileProjectile;
         //create the variable that tells on paint to show explosion image or not (for missile tower only)
         bool showExplosion = false;
         //create the graphics for the explosion (for missile tower only)
@@ -77,24 +77,28 @@ namespace BosenQuFelixLiuFinalCulminatingProject
         Stopwatch explosionCounter;
         //store the explosion image
         Bitmap explosionImage = Properties.Resources.Explosion;
-        //create the variable that checks if there's missile in the tower or not
+        //declear the variable that checks if there's missile in the tower or not
         public bool noMissile = false;
+        //store the index of the head of the array
+        const int HEAD = 0;
+        //declear the variable that stores the location of the last enemy
+        RectangleF boudingBoxOfTheLastEnemy; 
         /*
          * This is a constructer that record all the information for the projectile from the user. It takes the bounding box
          * of the defenseTower, the range of the defense tower, the type of the defense tower as its argument.
          */
-        public Projectile(RectangleF defenseTowerBB, float rangeInput, DefenseTowerType defenseTowerTypeInput)
+        public Projectile(RectangleF defenseTowerBBInput, float rangeInput, DefenseTowerType defenseTowerTypeInput)
         {
             //create the constants for each proprotities of the defense TOWER
             const float NORMAL_PROJECTILE_SPEED = 1000, LONG_RANGE_PROJECTILE_SPEED = 2000, MISSILE_PROJECTILE_SPEED = 200;
             const int NORMAL_PROJECTILE_DAMAGE = 50, LONG_RANGE_PROJECTILE_DAMAGE = 150, MISSILE_PROJECTILE_DAMAGE = 150;
             const float NORMAL_PROJECTILE_GAPTIME = 0.3f, LONG_RANGE_PROJECTILE_GAPTIME = 1.0f, MISSILE_PROJECTILE_GAPTIME = 1.5f;    
             //assign values to all private variables
-            centerPoint = Graphic.CalculateCenterPoint(defenseTowerBB);
+            centerPoint = Graphic.CalculateCenterPoint(defenseTowerBBInput);
             rangeRadius = rangeInput;
             defenseTowerType = defenseTowerTypeInput;
-            rangeBB = CalculateRangeBoundingBox(defenseTowerBB, rangeInput);
-            timeCounter = new Stopwatch();
+            rangeBB = CalculateRangeBoundingBox(defenseTowerBBInput, rangeInput);
+            timeCounter = new Stopwatch();           
             //set up the projectile depeding the type of the defenseTower
             switch (defenseTowerType)
             {
@@ -121,8 +125,8 @@ namespace BosenQuFelixLiuFinalCulminatingProject
                     projectileDamage = MISSILE_PROJECTILE_DAMAGE;
                     gapTime = MISSILE_PROJECTILE_GAPTIME;      
                     projectileSize = new SizeF(50, 50);
-                    initialXLocation = defenseTowerBB.X + defenseTowerBB.Width / 2;
-                    initialYLocation = defenseTowerBB.Y;
+                    initialXLocation = defenseTowerBBInput.X + defenseTowerBBInput.Width / 2 - projectileSize.Width / 2;
+                    initialYLocation = defenseTowerBBInput.Y;
                     break;
                 default:
                     break;
@@ -149,8 +153,9 @@ namespace BosenQuFelixLiuFinalCulminatingProject
          */  
         public float Shoot(ref Enemy[] targets)
         {
-            //stores the index of the head of the array
-            const int HEAD = 0;
+            //store the location of the last enemy
+            if (targets.Length == 1)
+                boudingBoxOfTheLastEnemy = targets[0].boundingBox;
             //if the shooting list is not initialized, initialize the shooting list by providing the capacity for
             //the array
             if(initializeShootingList == false)
@@ -241,45 +246,92 @@ namespace BosenQuFelixLiuFinalCulminatingProject
          * information of the enemies as its argument.
          */
         void ProjectileMotionForMissleTower(ref Enemy[] targets)
-        {
-            //store the head of the array
-            const int HEAD = 0;
+        {          
             //check each projectile in the list
             for (int i = HEAD; i < projectiles.Length; i++)
             {
                 float run = 0, rise = 0;
-                //calculte three sides of the triange formed between the starting point and the target
-                run = targets[projectiles[i].targetIndex].boundingBox.X - projectiles[i].x;
-                rise = targets[projectiles[i].targetIndex].boundingBox.Y - projectiles[i].y;
+                //if there are no more enemy left, let the flying projectile travel to the location of the last enemy
+                if (projectiles[i].targetIndex > targets.Length - 1)
+                {
+                    //update the rotate angle of the missile
+                    projectiles[i].image = Graphic.RotateImage(missileProjectileImage, Graphic.CalculateRotateAngle(projectiles[i].boundingBox.Location, Graphic.CalculateCenterPoint(boudingBoxOfTheLastEnemy)));
+                    //calculte three sides of the triange formed between the starting point and the target
+                    run = Graphic.CalculateCenterPoint(boudingBoxOfTheLastEnemy).X - projectiles[i].x;
+                    rise = Graphic.CalculateCenterPoint(boudingBoxOfTheLastEnemy).Y - projectiles[i].y;
+                }
+                //else, shoot at the current enemy
+                else
+                {
+                    projectiles[i].image = Graphic.RotateImage(missileProjectileImage, Graphic.CalculateRotateAngle(projectiles[i].boundingBox.Location, targets[projectiles[i].targetIndex].boundingBox.Location));
+                    //calculte three sides of the triange formed between the starting point and the target
+                    run = targets[projectiles[i].targetIndex].boundingBox.X - projectiles[i].x;
+                    rise = targets[projectiles[i].targetIndex].boundingBox.Y - projectiles[i].y;
+                }
                 float hypotenuse = (float)Math.Sqrt(run * run + rise * rise);
                 //update the enemy location
                 projectiles[i].x += (run / hypotenuse) * (speed * Main.deltaTime);
                 projectiles[i].y += (rise / hypotenuse) * (speed * Main.deltaTime);
                 projectiles[i].boundingBox.Location = new PointF(projectiles[i].x, projectiles[i].y);
-                projectiles[i].image = Graphic.RotateImage(missileProjectileImage, Graphic.CalculateRotateAngle(projectiles[i].boundingBox.Location, targets[projectiles[i].targetIndex].boundingBox.Location));
-                //check if the missle hit the enemy
-                for(int j = HEAD, k = targets.Length; j < k; j++)
+                //check if the projectile needs to be removed
+                MissileProjectileStatusCheck(i, ref targets);          
+            }
+        }
+        /*
+        * This function checks if the projectile needs to be removed from the list. It takes the index of a certain
+        * element in projectiles and the bouding box of the target as its argument. It returns true if it removed this
+        * element, false if not.
+        */
+        void MissileProjectileStatusCheck(int index, ref Enemy[] targets)
+        {
+            //if the projectile is out of boud, remove it and terminate the function
+            if (projectiles[index].x + projectileSize.Width < 0 || projectiles[index].x > Main.size.Width ||
+                    projectiles[index].y + projectileSize.Height < 0 || projectiles[index].y > Main.size.Height)
+            {
+                RemoveProjectile(index);
+                return;
+            }
+            //if there are no enemies left, let the shooted projectile intersect with the location of the last enemy
+            if (targets.Length == 0)
+            {
+                //if the missle hit the last location, show the explosion and remove the projectile
+                if (projectiles[index].boundingBox.IntersectsWith(boudingBoxOfTheLastEnemy) == true)
                 {
-                    //if the missle hit the enemy, show the explosion and remove the projectile
-                    if (Graphic.RectangleIntersectionDetection(targets[j].boundingBox, projectiles[i].boundingBox))
+                    //set the explosion boundingbox to the corrent size and location
+                    explosionBB.Size = explosionSize;
+                    explosionBB.Location = new PointF(projectiles[index].x - explosionSize.Width / 4, projectiles[index].y - explosionSize.Height / 2);
+                    //show the image of the explosion                
+                    showExplosion = true;
+                    //start the counter that stores the time for the explosion lasts            
+                    explosionCounter = new Stopwatch();
+                    explosionCounter.Start();
+                    //update the health of the enemy if they are in the explosion zone
+                    RemoveProjectile(index);
+                    return;
+                }
+            }
+            //check if the missle hit the enemy
+            for (int i = HEAD; i < targets.Length; i++)
+            {
+                //if the missle hit the enemy, show the explosion and remove the projectile
+                if (Graphic.RectangleIntersectionDetection(targets[i].boundingBox, projectiles[index].boundingBox))
+                {
+                    //set the explosion boundingbox to the corrent size and location
+                    explosionBB.Size = explosionSize;
+                    explosionBB.Location = new PointF(projectiles[index].x - explosionSize.Width / 4, projectiles[index].y - explosionSize.Height / 2);
+                    //show the image of the explosion                
+                    showExplosion = true;
+                    //start the counter that stores the time for the explosion lasts            
+                    explosionCounter = new Stopwatch();
+                    explosionCounter.Start();
+                    //update the health of the enemy if they are in the explosion zone
+                    for (int m = HEAD; m < targets.Length; m++)
                     {
-                        //set the explosion boundingbox to the corrent size and location
-                        explosionBB.Size = explosionSize;
-                        explosionBB.Location = new PointF(projectiles[i].x - explosionSize.Width / 4, projectiles[i].y - explosionSize.Height / 2);                
-                        //show the image of the explosion                
-                        showExplosion = true;             
-                        //start the counter that stores the time for the explosion lasts            
-                        explosionCounter = new Stopwatch();
-                        explosionCounter.Start();
-                        //update the health of the enemy if they are in the explosion zone
-                        for (int m = HEAD; m < targets.Length; m++)
-                        {
-                            if (Graphic.RectangleIntersectionDetection(explosionBB, targets[m].boundingBox))
-                                targets[m].health -= projectileDamage;
-                        }
-                        RemoveProjectile(i);
-                        break;
+                        if (Graphic.RectangleIntersectionDetection(explosionBB, targets[m].boundingBox))
+                            targets[m].health -= projectileDamage;
                     }
+                    RemoveProjectile(i);
+                    return;
                 }
             }
         }
@@ -291,19 +343,29 @@ namespace BosenQuFelixLiuFinalCulminatingProject
         void ProjectileMotionForNormalAndLongRangeTower(ref Enemy[] targets)
         {
             //check each projectile in the list
-            for (int i = 0; i < projectiles.Length; i++)
+            for (int i = HEAD; i < projectiles.Length; i++)
             {
                 float run = 0, rise = 0;
-                //calculte three sides of the triange formed between the starting point and the target
-                run = projectiles[i].targetInstantX - projectiles[i].startingX;
-                rise = projectiles[i].targetInstantY - projectiles[i].startingY;
+                if (projectiles[i].targetIndex > targets.Length - 1)
+                {
+                    //calculte three sides of the triange formed between the starting point and the target
+                    run = Graphic.CalculateCenterPoint(boudingBoxOfTheLastEnemy).X - projectiles[i].x;
+                    rise = Graphic.CalculateCenterPoint(boudingBoxOfTheLastEnemy).Y - projectiles[i].y;
+                }
+                //else, shoot at the current enemy
+                else
+                {
+                    //calculte three sides of the triange formed between the starting point and the target
+                    run = targets[projectiles[i].targetIndex].boundingBox.X - projectiles[i].x;
+                    rise = targets[projectiles[i].targetIndex].boundingBox.Y - projectiles[i].y;
+                }
                 float hypotenuse = (float)Math.Sqrt(run * run + rise * rise);
                 //update the enemy location
                 projectiles[i].x += (run / hypotenuse) * (speed * Main.deltaTime);
                 projectiles[i].y += (rise / hypotenuse) * (speed * Main.deltaTime);
-                projectiles[i].boundingBox.Location = new PointF(projectiles[i].x, projectiles[i].y);
-                //check if the enemy is out of bound, if so, terminate the loop and update the array length
-                BoundaryCheck(ref targets, i);                              
+                projectiles[i].boundingBox.Location = new PointF(projectiles[i].x, projectiles[i].y);             
+                //check if the projectile needs to be removed
+                NormalAndLongRangeProjectileStatusCheck(ref targets, i);           
             }
         }
         /*
@@ -311,7 +373,7 @@ namespace BosenQuFelixLiuFinalCulminatingProject
          * element in projectiles and the bouding box of the target as its argument. It returns true if it removed this
          * element, false if not.
          */
-        void BoundaryCheck(ref Enemy[] targets, int index)
+        void NormalAndLongRangeProjectileStatusCheck(ref Enemy[] targets, int index)
         {
             //if the projectile is out of boud, remove it and terminate the function
             if (projectiles[index].x + projectileSize.Width < 0 || projectiles[index].x > Main.size.Width ||
@@ -320,7 +382,16 @@ namespace BosenQuFelixLiuFinalCulminatingProject
                 RemoveProjectile(index);
                 return;
             }
-            for (int i = 0; i < targets.Length; i++)
+            if (targets.Length == 0)
+            {
+                //if the missle hit the enemy, show the explosion and remove the projectile
+                if (projectiles[index].boundingBox.Contains(boudingBoxOfTheLastEnemy) == true)
+                {
+                    RemoveProjectile(index);
+                    return;
+                }
+            }
+            for (int i = HEAD; i < targets.Length; i++)
             {
                 //if the projectile intersects with the target, remove it and terminate the function
                 if (Graphic.RectangleIntersectionDetection(projectiles[index].boundingBox, targets[i].boundingBox))
@@ -335,9 +406,7 @@ namespace BosenQuFelixLiuFinalCulminatingProject
          * This function resizes the projectile list to a certain size. It takes the new size as its argument.
          */
         void ResizeProjectile(int newSize)
-        {
-            //store the index of the head of the list
-            const int HEAD = 0;
+        {          
             //create a copy for the current list
             ProjectileInformation[] copy = new ProjectileInformation[newSize];
             if (newSize > projectiles.Length)
@@ -394,8 +463,10 @@ namespace BosenQuFelixLiuFinalCulminatingProject
             newProjectile.startingX = initialXLocation;
             newProjectile.startingY = initialYLocation;
             newProjectile.targetSize = targetBB.Size;
-            if (defenseTowerType != DefenseTowerType.Missile)
+            if (defenseTowerType == DefenseTowerType.Normal)
                 newProjectile.image = normalProjectileImage;
+            else if (defenseTowerType == DefenseTowerType.LongRange)
+                newProjectile.image = longRangeProjectileImage;
             else newProjectile.image = missileProjectileImage;
             newProjectile.targetIndex = targetIndex;
             //return the new proejctile
@@ -405,9 +476,7 @@ namespace BosenQuFelixLiuFinalCulminatingProject
         * This function resizes the shooting target list to a certain size. It takes the new size as its argument.
         */
         void ResizeShootingTargetIndex(int newSize)
-        {
-            //store the index of the head of the array
-            const int HEAD = 0;
+        { 
             //create a copy for the current list
             int[] copy = new int[newSize];
             if (shootingTargetIndex.Length > newSize)
@@ -439,20 +508,19 @@ namespace BosenQuFelixLiuFinalCulminatingProject
          */
         void RemoveShootingTargetIndex(int indexToRemove)
         {
+            //shift each element one place left
             for (int i = indexToRemove, n = shootingTargetIndex.Length - 1; i < n; i++)
                 shootingTargetIndex[i] = shootingTargetIndex[i + 1];
+            //resize the list to one less of its length
             ResizeShootingTargetIndex(shootingTargetIndex.Length - 1);
         }
         /*
-         * This function draws the projectile. It takes the paint event argument of main form and the image of
-         * the projectile as its argument.
+         * This function draws the projectile. It takes the paint event argument of main form as its arguement.
          */
-        public void Paint(PaintEventArgs e, Image projectileImage)
+        public void Paint(PaintEventArgs e)
         {
-            //store in the head of the array
-            const int HEAD = 0;
             //draw the projectile 
-            for (int i = HEAD, n = projectiles.Length; i < n; i++)
+            for (int i = HEAD; i < projectiles.Length; i++)
                 e.Graphics.DrawImage(projectiles[i].image, projectiles[i].boundingBox);
             //if there's an explosion, show the explosion image
             if (showExplosion == true)

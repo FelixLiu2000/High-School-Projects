@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Bosen Qu
+ * January 24, 2015
+ * This following program creates and paints the background 
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,63 +14,98 @@ using BosenQuFelixLiuFinalCulminatingProject.GUI;
 
 namespace BosenQuFelixLiuFinalCulminatingProject
 {
-    enum Tile { Road, Grass, Barrier, WidgetBar};
-
+    /*
+     * This enumeration classifies the type of each tile
+     */
+    enum Tile
+    {
+        Road, Grass, Barrier, WidgetBar
+    }
+    /// <summary>
+    /// This class divieds the background to different tiles with various propertities. It also paints
+    /// the background
+    /// </summary>
     class Background
     {
-        //background
+        //declear the variables needed for background tiles
         const int BACKGROUND_TILE_WIDTH = 26, BACKGROUND_TILE_HEIGHT = 16;
         Image[,] tileImages = new Image[BACKGROUND_TILE_WIDTH, BACKGROUND_TILE_HEIGHT];
         public RectangleF[,] tileBB = new RectangleF[BACKGROUND_TILE_WIDTH, BACKGROUND_TILE_HEIGHT];
         public SizeF tileSize = new SizeF(50, 50);
         public Tile[,] tileProperties = new Tile[BACKGROUND_TILE_WIDTH, BACKGROUND_TILE_HEIGHT];
-        //bushes
+        //declear the variables needed for bushes
         const int NUMBER_OF_BUSHES = 6;
         RectangleF[] bushBB = new RectangleF[NUMBER_OF_BUSHES];
         SizeF bushSize = new SizeF(100, 100);
         Image[] bushImages = new Image[NUMBER_OF_BUSHES];
-        //stones
+        //declear the variables needed for stones
         const int NUMBER_OF_STONES = 4;
         RectangleF[] stoneBB = new RectangleF[NUMBER_OF_STONES];
         SizeF stoneSize = new SizeF(80, 80);
         Image[] stoneImages = new Image[NUMBER_OF_STONES];
+        //declear the image that shows wrench when the user is placing item
         Image placingItemImage = Properties.Resources.PlacingItem;
+        //declear the vairbles to check if the user user is placing items or not
         public static bool placingDefenseTower;
+        //declear the bouding box of the widget bar on the top right of the screen
         Rectangle widgetBar;
-
+        //store the index of the head of the array
+        const int HEAD = 0;
+        /*
+         * This constructor initializeds the background. It takes the recatangle of the widget bar
+         * as its argument
+         */
         public Background(Rectangle bar)
         {
+            //copy the input rectnagle to the widget ba
             widgetBar = bar;
+            //initialize the background
             InitialSetting();
         }
+        /*
+         * This function calculates the actual coordinate of the tile. It takes the index of
+         * a two dementional array as its argument. It returns the actual point on the screen.
+         */
         PointF TileToCoordinate(int xTile, int yTile)
         {
+            //calculate the x and y coordinate
             float x = xTile * tileSize.Width;
             float y = yTile * tileSize.Height;
+            //return the new point
             return new PointF(x, y);
         }
+        /*
+         * This function calculates the width index of the a certain element of the array. It takes an acutal
+         * x location as its argument. It returns the width index of the array as its argument.
+         */
         public int XCoordinateToXTile(int x)
         {
             return (int)(x / tileSize.Width);
         }
+        /*
+         * This function calculates the height index of the a certain element of the array. It takes an acutal
+         * y location as its argument. It returns the height index of the array as its argument.
+         */
         public int YCoordinateToYTile(int y)
         {
             return (int)(y / tileSize.Height);
         }
-       
+       /*
+        * This function initializeds the background by assigning propertities to each tiles of the background
+        */
         void InitialSetting()
         {
-            //background image
-            for (int i = 0; i < BACKGROUND_TILE_WIDTH; i++)
-                for (int j = 0; j < BACKGROUND_TILE_HEIGHT; j++)
+            //assignment propertities to each background tile
+            for (int i = HEAD; i < BACKGROUND_TILE_WIDTH; i++)
+                for (int j = HEAD; j < BACKGROUND_TILE_HEIGHT; j++)
                 {
                     tileBB[i, j].Location = TileToCoordinate(i, j);
                     tileBB[i, j].Size = tileSize;
                     tileImages[i, j] = Properties.Resources.Grass;
                     tileProperties[i, j] = Tile.Grass;
                 }
-
-            for (int i = 0; i <= 5; i++)
+            //settings for grass
+            for (int i = HEAD; i <= 5; i++)
             {
                 tileImages[14, i] = Properties.Resources.RoadLeft;
                 tileImages[15, i] = Properties.Resources.RoadRight;
@@ -115,7 +155,6 @@ namespace BosenQuFelixLiuFinalCulminatingProject
             tileProperties[23, 13] = Tile.Road;
             tileImages[22, 13] = Properties.Resources.RoadDown;
             tileProperties[22, 13] = Tile.Road;
-
             for (int i = 21; i >= 8; i--)
             {
                 tileImages[i, 12] = Properties.Resources.RoadUp;
@@ -172,9 +211,8 @@ namespace BosenQuFelixLiuFinalCulminatingProject
                 tileProperties[3, i] = Tile.Road;
                 tileProperties[2, i] = Tile.Road;
             }
-
-            //bushes
-            for (int i = 0; i < NUMBER_OF_BUSHES; i++)
+            //settings for bushes
+            for (int i = HEAD; i < NUMBER_OF_BUSHES; i++)
                 bushBB[i].Size = bushSize;
             bushBB[0].Location = new PointF(500, 100);
             bushImages[0] = Properties.Resources.Bush1;
@@ -189,8 +227,7 @@ namespace BosenQuFelixLiuFinalCulminatingProject
             bushImages[4] = Properties.Resources.Bush1;
             bushBB[5].Location = new PointF(100, 38);
             bushImages[5] = Properties.Resources.Bush2;
-
-            //stones
+            //settings for stones
             for (int i = 0; i < NUMBER_OF_STONES; i++)
                 stoneBB[i].Size = stoneSize;
             stoneBB[0].Location = new PointF(211, 576);
@@ -202,49 +239,58 @@ namespace BosenQuFelixLiuFinalCulminatingProject
             stoneBB[3].Location = new PointF(1180, 435);
             stoneImages[3] = Properties.Resources.Stone2;
 
-            for (int i = 0; i < BACKGROUND_TILE_WIDTH; i++)
-                for (int j = 0; j < BACKGROUND_TILE_HEIGHT; j++)
+            for (int i = HEAD; i < BACKGROUND_TILE_WIDTH; i++)
+                for (int j = HEAD; j < BACKGROUND_TILE_HEIGHT; j++)
                 {
-                    for (int k = 0; k < NUMBER_OF_BUSHES; k++)
+                    for (int k = HEAD; k < NUMBER_OF_BUSHES; k++)
                         if (tileBB[i, j].IntersectsWith(bushBB[k]))
                             tileProperties[i, j] = Tile.Barrier;
-                    for (int k = 0; k < NUMBER_OF_STONES; k++)
+                    for (int k = HEAD; k < NUMBER_OF_STONES; k++)
                         if (tileBB[i, j].IntersectsWith(stoneBB[k]))
                             tileProperties[i, j] = Tile.Barrier;
                 }
 
             for (int i = (int)(BACKGROUND_TILE_WIDTH - Math.Ceiling((float)widgetBar.Width / (float)tileSize.Width)); i < BACKGROUND_TILE_WIDTH; i++)
-                for (int j = 0; j < Math.Ceiling((float)widgetBar.Height / (float)tileSize.Height); j++)
+                for (int j = HEAD; j < Math.Ceiling((float)widgetBar.Height / (float)tileSize.Height); j++)
                 {
                     tileProperties[i, j] = Tile.WidgetBar;
                 }                 
         }
-
+        /*
+         * This function checks if the user can place item on a certain location. This function takes the location of 
+         * the target that user wants to place as its argument. If there is barrier on that location, it returns false, 
+         * else it return true.
+         */
         public bool CheckPlacingItem(PointF targetLocation)
         {
-            int widthIndex = (int)(targetLocation.X / tileSize.Width);
-            int heightIndex = (int)(targetLocation.Y / tileSize.Height);
+            //calculate the index of the element
+            int widthIndex = XCoordinateToXTile((int)targetLocation.X);
+            int heightIndex = YCoordinateToYTile((int)targetLocation.Y);
+            //return false if there are items placing on the element, else return false
             if (tileProperties[widthIndex, heightIndex] == Tile.Road ||
                 tileProperties[widthIndex, heightIndex] == Tile.Barrier || tileProperties[widthIndex, heightIndex] == Tile.WidgetBar)
                 return false;
             return true;
         }
-
+        /*
+         * This function paints the background. It takes the paint event argument from main as its argument.
+         */
         public void Paint(PaintEventArgs e)
         {
-            Pen myPen = new Pen(Color.Black);
-
-            for (int i = 0; i < BACKGROUND_TILE_WIDTH; i++)
-                for (int j = 0; j < BACKGROUND_TILE_HEIGHT; j++)
+            //paint each tile
+            for (int i = HEAD; i < BACKGROUND_TILE_WIDTH; i++)
+                for (int j = HEAD; j < BACKGROUND_TILE_HEIGHT; j++)
                 {
                     if (placingDefenseTower == true && tileProperties[i, j] == Tile.Grass)
                         e.Graphics.DrawImage(placingItemImage, tileBB[i, j]);
                     else
                         e.Graphics.DrawImage(tileImages[i, j], tileBB[i, j]);
                 }
-            for (int i = 0; i < NUMBER_OF_BUSHES; i++)
+            //paint each bush
+            for (int i = HEAD; i < NUMBER_OF_BUSHES; i++)
                 e.Graphics.DrawImage(bushImages[i], bushBB[i]);
-            for (int i = 0; i < NUMBER_OF_STONES; i++)
+            //paint each stone
+            for (int i = HEAD; i < NUMBER_OF_STONES; i++)
                 e.Graphics.DrawImage(stoneImages[i], stoneBB[i]);          
         }
     }

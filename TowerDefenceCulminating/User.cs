@@ -1,6 +1,6 @@
 ﻿/*
  * Felix Liu
- * January 19th, 2017
+ * January 21st, 2017
  * 
  * Contains methods and properties about the game's current user. Stores values such as money, lives, and waves, and provides methods to
  * modify, get, or compare these values.
@@ -29,7 +29,7 @@ namespace BosenQuFelixLiuFinalCulminatingProject
         const int USER_START_LIVES = 10;
         // Integer properties for the user's money, lives, and number of waves survived. These properties have private
         // setters to allow modification only within the object or using specialized methods.
-        public int Money { get; private set;}
+        public int Money { get; private set; }
         public int Lives { get; private set; }
         public int WavesSurvived { get; private set; }
         // Private boolean that stores whether or not the user is alive.
@@ -48,7 +48,7 @@ namespace BosenQuFelixLiuFinalCulminatingProject
         public void LivesLoss()
         {
             // Reduce lives by 1
-            Lives--;;
+            Lives--; ;
             // If the user's lives are 0 or less, set the user as dead
             if (Lives <= 0)
                 isAlive = false;
