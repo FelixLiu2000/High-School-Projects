@@ -1,0 +1,2 @@
+One of the first games I made in Grade 11, a single class cannon game where one must adjust the angle and speed of a projectile to hit a target. The game is themed around squirrels firing acorns at owls.\
+The projectile abides by gravity and the speed and angle are represented as a vector magnitude and direction. The game features a panning mechanism to produce the illusion of space and distance. Image assets are not mine and are used in accordance with fair use.
